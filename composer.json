@@ -1,0 +1,11 @@
+{
+	"autoload" : {
+		"psr-4" : {
+			"app\\" : "app/"
+		}
+	},
+	"require" : {
+		"nfephp-org/sped-nfe" : "dev-master",
+		"nfephp-org/sped-da" : "^1.0"
+	}
+}
