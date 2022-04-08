@@ -1,3 +1,5 @@
+<script src="<?php echo URL_BASE ?>assets/js/js_venda.js"></script>	
+
 <?php $display = ($itens) ? "display:block" : "display:block" ?>
 <section class="pdv-base">
 <div class="conteudo-fluido">
@@ -28,6 +30,8 @@
 				<div class="caixa width-100 p-2 bg-title2 border-0 mb-1">
 				<div class="width-100 border-0">
 				<div class="rows">
+
+				
 					<div class="col-12 postion-relative">
 						<div class="caixa border-0 p-1">
 							<small class="text-label pb-0 mt-0">Código</small>
@@ -69,16 +73,19 @@
 									<input type="text" name = "total" id="total" class="form-campo neutro text-left" >
 									<input type="hidden" name="id_produto" id="id_produto"  >
 									<input type="hidden" id="id_venda" value = "<?php echo $venda->id_venda ?>" name="id_venda"  >
+									
 								</div>
 							</div>
-							
+							<form action="">
+							<input type="submit" value="finalizar" id="inserir">
+							</form>
 							
 							</div>
 						</div>
 					  </div>
 					  </div>
 				  </div>
-				
+				  
 					
 			</div>
 			</div>
@@ -109,7 +116,9 @@
 					<tbody role="alert" aria-live="polite" aria-relevant="all" id="itensDaVenda">
 					<?php 
 						$i=1;
-						foreach($itens as $item){ ?>
+						foreach($itens as $item){ 
+							 $qtde += $item->qtde ;
+							?>
 						<tr class='cor-tab1'>
 							<td align="center"> <?php echo $i++ ?></td>
 							<td> <?php echo $item->produto ?>   </td>
@@ -120,7 +129,10 @@
 									<a href="javascript:;"  onclick="abrirTelaCancelamento(<?php echo $item->id_item_venda  ?>)" title="Excluir"><i class="fas fa-trash-alt text-vermelho"></i></a></td>
 							  
 						</tr> 
-					<?php } ?>
+						
+					<?php }
+					
+					?>
 					</tbody>
 				</table>
 				</div>
@@ -146,7 +158,8 @@
 							<div class="rows">
 								<div class="col-6">
 									<small class="text-label pb-0 text-roxo text-uppercase mb-0">Volumes</small>
-									<input type="text" name = "volume" id="volume" value="<?php echo $qtde ?>" class="form-campo neutro text-left" placeholder="R$000,00">
+										
+									<input type="text" name = "volume" id="volume" value="<?php echo $qtde   ?>" class="form-campo neutro text-left" placeholder="0">
 									
 								</div>
 								<div class="col-6">
@@ -165,6 +178,7 @@
 	<div class="col-12">				
 				<div class="base-botoes bg-title2 mt-0 radius-4 p-1">  
 					<div class="border-0 py-1 text-center mb-0 caixa">  
+
 						<a href="javascript:;"  onclick="chamarTelaPagamento()"   class="d-inline-block btn"><i class="fas fa-check"></i> Finalizar Venda</a>
 						<a href="javascript:;" onclick="abrirModal('#cliente')"   class="d-inline-block btn-link"><i class="fas fa-user text-azul"></i> Identificar cliente</a>
 						<a href="javascript:;" onclick="abrirModal('#cancelaritem')"  class="d-inline-block btn-link"><i class="fas fa-times text-vermelho"></i> Cancelar item</a>
@@ -230,7 +244,9 @@
 					<div class="col-4">
 						<label class="text-label text-branco">Forma de pagamento</label>
 						<select class="form-campo" id="id_forma_pagamento" onchange="mostrar_parcelas()">
+						<!--<option value="">Selecione...</option>-->
 						<?php 
+
 						foreach($formas_pgto as $forma){
 						    echo "<option value='$forma->id_forma_pagamento'>$forma->forma_pagamento</option>";
 						}
@@ -289,7 +305,7 @@
 					</div>
 					<div class="col d-flex">
 						<div class="caixa  border-top text-left base-botoes radius-0 p-1">
-								<a  href="<?php echo URL_BASE . "venda/finalizar/" . $venda->id_venda ?>" class="btn btn-roxo d-inline-block btn-medio">Finalizar</a>	
+								<a  href="<?php echo URL_BASE . "pdv/finalizar/" . $venda->id_venda ?>" class="btn btn-roxo d-inline-block btn-medio">Finalizar</a>	
 								<a href="#" class="btn btn-vermelho d-inline-block btn-medio">Cancelar</a>						
 						</div>
 					</div>
@@ -307,23 +323,23 @@
 					
 						<tr>
 							<td class="text-azul">Desconto</td>
-							<td class="text-azul text-right"><span id="lbl_total_acrescimo"><?php echo $venda->desconto ?></span></td>
+							<td class="text-azul text-right"><span id="lbl_desconto"><?php echo $venda->desconto ?></span></td>
 						</tr>
 						<tr>
 							<td class="text-azul">Total a receber</td>
-							<td class="text-azul text-right"><span id="lbl_total_receber"><?php echo $dados_pagamento->total_receber ?></span></td>
+							<td class="text-azul text-right"><span id="lbl_total_receber"><?php echo $dados_pagamento->total_receber ?><?php echo $valores->total_receber?></span></td>
 						</tr>
 						<tr>
 							<td class="text-verde">Total recebido</td>
-							<td class="text-verde text-right"><span id="lbl_total_recebido"><?php echo $dados_pagamento->total_recebido ?></span></td>
+							<td class="text-verde text-right"><span id="lbl_total_recebido"><?php echo $dados_pagamento->total_recebido ?><?php echo $valores->total_recebido?></span></td>
 						</tr>
 						<tr>
 							<td class="text-azul">Restante</td>
-							<td class="text-azul text-right"><span id="lbl_total_restante"><?php echo $dados_pagamento->total_restante ?></span></td>
+							<td class="text-azul text-right"><span id="lbl_total_restante"><?php echo $dados_pagamento->total_restante ?><?php echo $valores->total_restante?></span></td>
 						</tr>
 						<tr>
 							<td class="text-vermelho">Troco</td>
-							<td class="text-vermelho text-right"><span id="lbl_troco">00,00</span></td>
+							<td class="text-vermelho text-right"><span id="lbl_troco"></span></td>
 						</tr>
 					</tbody>
 				</table>
@@ -576,7 +592,7 @@
 	var total_pagar = "<?php echo $venda->total ?>";
 </script>
 
-<script src="<?php echo URL_BASE ?>assets/js/js_venda.js"></script>
+
 
 <!--carregameto-->
 <div class="window carregar" id="janela2" style="display:none;text-align:center">	

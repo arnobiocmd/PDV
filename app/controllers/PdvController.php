@@ -4,7 +4,9 @@ namespace app\controllers;
 
 use app\core\Controller;
 use app\models\service\ItensVendaService;
+use app\models\service\PagamentoService;
 use app\models\service\Service;
+use app\models\service\VendaService;
 
 class PdvController extends Controller{
     private $tabela = "venda";
@@ -22,7 +24,16 @@ class PdvController extends Controller{
             }
         $dados['venda'] = $venda;
         $dados['itens'] = ItensVendaService::listaPorVenda($venda->id_venda);
+        $dados['formas_pgto'] = Service::lista('forma_pagamento');
+        $dados['pagamentos'] = PagamentoService::listaPorVenda($venda->id_venda);
+        $dados['valores'] = VendaService::somarPagamento($venda->id_venda);
+       
         $dados['view'] = "Pdv/Index";
         $this->load("template",$dados);
+    }
+
+    public function finalizar($id_venda){
+        VendaService::finalizar($id_venda);
+        $this->redirect(URL_BASE."pdv");
     }
 }
