@@ -6,7 +6,7 @@
 				<a href="<?php echo URL_BASE ?>" class="logo" alt="ERP completa"><img src="<?php echo URL_BASE ?>assets/img/logo.png" class="img-fluido"></a>	
 					
 				<ul class="menutopo">
-					<li class="sub"><img src="<?php echo URL_BASE ?>assets/img/user.jpg" class="img"> <span><?php echo $_SESSION[SESSION_LOGIN]->usuario->nome ?> </span>				
+					<li class="sub"><img src="<?php echo URL_BASE ?>assets/img/user.jpg" class="img"> <span><?php echo $_SESSION[SESSION_LOGIN]->usuario->usuario?> </span>				
 						<ul>
 							<li><a href="<?php echo URL_BASE ."login/logoff"?>"><i class="fas fa-sign-in-alt"></i> Sair</a></li>
 						</ul>
@@ -16,7 +16,9 @@
 				<nav class="menuprincipal" id="principal">					
 					<ul class="menu-ul">
 						<li class="bg-menu"><a href=""><i class="icon fas fa-arrow-left"></i> Recolher menu</a></li>
+							<?php if(app\models\service\AclService::pode("pdv")) { ?>
 						<li><a href="<?php echo URL_BASE . "pdv" ?>"><i class="icon fas fa-file-invoice-dollar"></i> PDV</a></li>
+							<?php }?>		
 						<li><a href="<?php echo URL_BASE . "configuracao" ?>"><i class="icon fas fa-file-invoice-dollar"></i> Configurações de nota</a></li>
 						<li><a href="#menu_cadastro"><span>+</span>  Cadastro <i class="icon ihome fas fa-plus-circle"></i></a></li>
 						<li><a href="#menu_tributacao" rel="ativo"><span>+</span>  Tributação <i class="icon ihome fas fa-book"></i></a></li>

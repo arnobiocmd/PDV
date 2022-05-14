@@ -15,8 +15,8 @@
 						</div>	
 						<div class="barra">
 							<div class="rows px-2 justify-content-space-between">
-								<div class="col-2"><small>Horário:</small> <span>20:00</span></div>
-								<div class="col-2"><small>Data:</small> <span>10/05/2021</span></div>
+								<div class="col-2"><small>Horário:</small> <span><?php echo date("H:i:s")?></span></div>
+								<div class="col-2"><small>Data:</small> <span><?php echo date("d/m/Y")?></span></div>
 							</div>
 						</div>		
 					</div>	

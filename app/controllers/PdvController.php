@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\core\Controller;
+use app\models\service\AclService;
 use app\models\service\ItensVendaService;
 use app\models\service\PagamentoService;
 use app\models\service\Service;
@@ -12,6 +13,7 @@ class PdvController extends Controller{
     private $tabela = "venda";
     private $campo  = "id_venda";
     public function index(){
+        AclService::temPermissao("pdv");
         $dados['view'] = "Pdv/Livre";
         $this->load("template",$dados);
     }
@@ -37,3 +39,4 @@ class PdvController extends Controller{
         $this->redirect(URL_BASE."pdv");
     }
 }
+

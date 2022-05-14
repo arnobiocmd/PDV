@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 	<head>
-		<title>Sistema NFe - mjailton</title>
+		<title>Sistema PDV - Arnobio</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">		
 		<!--css-->
@@ -14,9 +14,16 @@
 		<link rel="stylesheet" href="<?php echo URL_BASE ?>assets/css/grade.css">
 		<link rel="stylesheet" href="<?php echo URL_BASE ?>assets/css/style.css">		
 	</head>
+
+	
 	
 <body class="base-login-util comsenha">
+
 	<div class="caixa-login position-relative">
+	<?php
+		$this->verErro();
+		$this->verMsg();
+	?>
 		<form action="<?php echo URL_BASE ."login/logar" ?>" method="post">
 			<img src="<?php echo URL_BASE ?>assets/img/logo_2.png" class="d-block m-auto img-fluido">
 			<label> <span class="text-label label">Login</span> 
