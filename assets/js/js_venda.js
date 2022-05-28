@@ -32,6 +32,14 @@ $(function(){
             var  id_produto  =    $('#id_produto').val();
             var qtde        =    $('#qtde').val();
             var  preco       =    $('#preco').val();
+            var estoque      =    $('#estoque').val();
+
+           /* if(estoque < qtde){
+                alert("O estoque não é suficiente para ateder está venda");
+                return;
+            }*/
+
+          
 
            
             
@@ -57,6 +65,9 @@ $(function(){
                   //  $('#total').val(data.preco);
                   // $('#qtde').focus();
                   // $('#itensDaVenda');
+                  if(data.erro > 0){
+                      alert(data.msg[0]);
+                  }
                   
                   lista_itens_venda(data.lista);
                  

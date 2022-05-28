@@ -30,6 +30,36 @@ class AclService{
         return false;
     }
 
+    public static function LogarEVerificarSeTemPermissao($usuario,$senha,$permissao){
+        $login = self::logarComUsuarioSenha($usuario,$senha);
+        if($login){
+            $permissao = self::podeDireto($permissao,$login->id_usuario);
+            if(!$permissao){
+                Flash::setMsg("Sem permissão para está operação", -1);  
+                return 0;
+            }
+        }else{
+            Flash::setMsg("Usuario ou senha não encontrados", -1);
+            return 0;
+        }
+
+        return $login->id_usuario;
+
+    }
+
+    public static function podeDireto($permissao,$id_usuario){
+        $permissoes = self::listaPermissaoPorUsuario($id_usuario);
+        if(in_array($permissao,$permissoes)){
+            return true;
+        }
+        return false;
+    }
+
+    public static function logarComUsuarioSenha($usuario,$senha){
+        $dao = new AclDao();
+        return $dao->logarComUsuarioSenha($usuario,$senha);
+    }
+
     public static function temPermissao($permissao){
         if(!in_array($permissao,$_SESSION[SESSION_LOGIN]->permissoes)){
             header("Location:" .URL_BASE."sempermissao");

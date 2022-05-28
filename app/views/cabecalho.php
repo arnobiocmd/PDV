@@ -85,9 +85,11 @@
 	<ul class="menu-ul">
 		<li class="bg-menu"><a href=""><i class="icon fas fa-arrow-left"></i> Recolher menu</a></li>
 		<span class="h5 p-1 py-2 text-branco mb-0 d-block text-uppercase"><i class="icon fas fa-cubes"></i> Caixa</span>
+		<li><a href="<?php echo URL_BASE . "caixanumero" ?>"><i class="icon fas fa-list"></i>Número Caixa</a></li>
 		<li><a href="<?php echo URL_BASE . "caixa" ?>"><i class="icon fas fa-list"></i> Caixas</a></li>
 		<li><a href="<?php echo URL_BASE . "sangria" ?>"><i class="icon fas fa-list"></i> Sangria</a></li>
 		<li><a href="<?php echo URL_BASE . "suplemento" ?>"><i class="icon fas fa-list"></i> Suplemento</a></li>
+		<li><a href="<?php echo URL_BASE . "caixa/create" ?>"><i class="icon fas fa-list"></i> Abertura de Caixa</a></li>
 		<li><a href="<?php echo URL_BASE . "caixa/fechamento" ?>"><i class="icon fas fa-list"></i> Fechamento</a></li>
 	</ul>
 </nav>

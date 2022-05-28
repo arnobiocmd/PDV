@@ -8,10 +8,19 @@ use app\models\service\ItensVendaService;
 use app\models\service\PagamentoService;
 use app\models\service\Service;
 use app\models\service\VendaService;
+use app\util\UtilService;
 
 class PdvController extends Controller{
     private $tabela = "venda";
     private $campo  = "id_venda";
+    public function __construct(){
+        $this->usuario = UtilService::getUsuario();
+       // i($this->usuario);
+        if(!$this->usuario){
+           $this->redirect(URL_BASE."login");
+           
+        } 
+     }
     public function index(){
         AclService::temPermissao("pdv");
         $dados['view'] = "Pdv/Livre";
@@ -21,7 +30,7 @@ class PdvController extends Controller{
     public function create(){
         $venda = Service::get($this->tabela,"finalizada","N");
             if(!$venda){
-                $id_venda = Service::inserir(["data_venda"=>hoje(),"hora_venda"=>agora()],$this->tabela);
+                $id_venda = Service::inserir(["data_venda"=>hoje(),"hora_venda"=>agora(),"id_usuario_venda"=>$this->usuario->usuario->id_usuario],$this->tabela);
                 $venda = Service::get($this->tabela,$this->campo,$id_venda);
             }
         $dados['venda'] = $venda;

@@ -24,6 +24,22 @@ class VendaService{
     }
 
     public static function finalizar($id_venda){
+        $itens = Service::get("item_venda","id_venda",$id_venda,true);
+        $venda = Service::get("venda","id_venda",$id_venda);
+        foreach ($itens as $item) {
+            $mov = new \stdClass();
+            $mov->id_tipo_movimento     = 7;
+            $mov->id_produto            = $item->id_produto;
+            $mov->id_venda              = $id_venda;
+            $mov->entrada_saida	        = "S";
+            $mov->data_movimento        = $venda->data_venda;
+            $mov->qtde_movimento        = $item->qtde;
+            $mov->valor_movimento	    = $item->valor;
+            $mov->subtotal_movimento    = $item->subtotal;
+            $mov->descricao             = "Saida Venda de Produto ".$id_venda;
+            $mov->id_usuario_movimento  = $venda->id_usuario_venda;
+            MovimentoService::inserir($mov);
+        }
         Service::editar(["finalizada"=>"S","id_venda"=>$id_venda],"id_venda","venda");
     }
 }

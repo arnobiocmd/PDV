@@ -80,4 +80,16 @@ class ProdutoController extends Controller{
         $produto = ProdutoService::getProduto($id);
         echo json_encode($produto);
     }
+
+    public function buscar($q){
+        $produtos = Service::getLike($this->tabela,"produto",$q,true);
+
+        echo json_encode($produtos);
+    }
+
+    public function estoqueBaixo(){
+        $dados['lista'] = ProdutoService::estoqueBaixo();
+        $dados['view'] = "Produto/Index";
+        $this->load("template",$dados);
+    }
 }

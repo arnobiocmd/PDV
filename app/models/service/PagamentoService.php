@@ -10,4 +10,9 @@ class PagamentoService{
         return $dao->listaPorVenda($id_venda);
         
     }
+
+    public static function somaPorCaixaFormaPagamento($id_caixa,$id_forma_pagamento){
+        $dao = new PagamentoDao();
+        return $dao->somaPorCaixaFormaPagamento($id_caixa,$id_forma_pagamento);
+    }
 }

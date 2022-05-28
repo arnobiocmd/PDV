@@ -15,4 +15,10 @@ class AclDao extends Model{
         WHERE pp.id_permissao = p.id_permissao AND pp.id_perfil = '$id_perfil' ";
         return $this->select($this->db,$sql);
     }
+
+    public function logarComUsuarioSenha($usuario,$senha){
+        $sql = "SELECT * FROM usuario WHERE usuario = '$usuario' AND senha = '$senha'";
+        return $this->select($this->db,$sql,false);
+
+    }
 }

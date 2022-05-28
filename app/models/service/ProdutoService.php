@@ -36,4 +36,14 @@ class ProdutoService{
         $dao = new ProdutoDao();
         return $dao->listaProdutoCfop();
     }*/
+
+    public static function atualizarEstoque($id_produto,$qtde){
+        $dao = new ProdutoDao();
+        return $dao->atualizarEstoque($id_produto,$qtde);
+    }
+
+    public static function estoqueBaixo(){
+        $dao = new ProdutoDao();
+        return $dao->estoqueBaixo();
+    }
 }
